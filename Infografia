@@ -3,39 +3,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infografía: Plan de Rescate MITRECONECT</title>
-    <!-- Chosen Palette: Brilliant Blues (Adapted) -->
-    <!-- Application Structure Plan: La estructura de la SPA es una narrativa de una sola página que sigue el flujo lógico del reporte: 1) Encabezado y Crisis, 2) Sección de "Acción Inmediata" (Punto 1.a) con tarjetas de acción y el gráfico de Dona, 3) Sección "Hoja de Ruta de la Reforma" (Punto 1.b) usando una línea de tiempo de HTML/Tailwind y el gráfico de Barras, y 4) Sección "Vigilancia Permanente" (Punto 1.c) con tarjetas para la "Doble Vigilancia" y el gráfico de Líneas. Esta estructura temática (Problema -> Solución -> Prevención) fue elegida por ser la más intuitiva para que un usuario comprenda el plan de acción completo de Gobierno Corporativo. -->
-    <!-- Visualization & Content Choices: 
-        1. Datos (1.a - Focos de Fraude): Meta -> Informar (Composición). Viz -> Gráfico de Dona (Chart.js). Justificación -> Muestra claramente la proporción del principal foco de auditoría ("Gastos Operativos"). Sin SVG.
-        2. Datos (1.b - Reforma del Consejo): Meta -> Comparar (Categorías Antes/Después). Viz -> Gráfico de Barras Agrupado (Chart.js). Justificación -> Compara directamente la cuenta de tipos de consejeros (Ejecutivos vs. Independientes) para mostrar el cambio. Sin SVG.
-        3. Datos (1.c - Impacto de Vigilancia): Meta -> Mostrar Cambio/Relación (Tendencia en el tiempo). Viz -> Gráfico de Líneas Combinado (Chart.js) con 2 ejes Y. Justificación -> Demuestra la correlación inversa entre el aumento de reportes éticos y la disminución de pérdidas por fraude. Sin SVG.
-        4. Datos (1.b - Fases del Plan): Meta -> Organizar (Proceso). Viz -> Línea de Tiempo HTML/Tailwind. Justificación -> Muestra la secuencia de los pasos de la reforma sin usar SVG o Mermaid JS, cumpliendo los requisitos.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <base href="/"> 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F3F4F6; /* Light Gray BG */
-            color: #1F2937; /* Dark Gray Text */
+            background-color: #F3F4F6;
+            color: #1F2937;
         }
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Max width for readability */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* Base height */
-            max-height: 400px; /* Max height */
+            height: 300px;
+            max-height: 400px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px; /* Taller on desktop */
+                height: 350px;
             }
         }
-        /* Estilos para la Línea de Tiempo (Sin SVG/Mermaid) */
         .timeline-line {
             position: absolute;
             left: 50%;
@@ -43,7 +34,7 @@
             top: 20px;
             bottom: 20px;
             width: 4px;
-            background-color: #A9D0DE; /* Light Blue */
+            background-color: #A9D0DE;
             border-radius: 2px;
         }
         .timeline-item {
@@ -60,7 +51,7 @@
             border-radius: 0.5rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border-top: 4px solid #4771B2; /* Medium Blue accent */
+            border-top: 4px solid #4771B2;
         }
         .timeline-item:nth-child(odd) .timeline-content {
             float: left;
@@ -70,72 +61,79 @@
             float: right;
             text-align: left;
         }
-        .timeline-item::after { /* Círculo en la línea */
+        .timeline-item::after {
             content: '';
             position: absolute;
             width: 20px;
             height: 20px;
             background-color: white;
-            border: 4px solid #00429D; /* Dark Blue */
+            border: 4px solid #00429D;
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1;
         }
-        .timeline-item::before { /* Limpiador de float */
+        .timeline-item::before {
             content: "";
             display: table;
             clear: both;
+        }
+        .text-justify {
+            text-align: justify;
         }
     </style>
 </head>
 <body class="bg-gray-100">
 
-    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl leading-relaxed">
 
         <header class="text-center mb-12">
             <h1 class="text-4xl md:text-6xl font-extrabold text-[#00429D]">🛡️ RESCATE DE LA CONFIANZA EN MITRECONECT</h1>
             <p class="text-xl md:text-2xl font-semibold text-gray-700 mt-4">Plan de Acción de Gobierno Corporativo ante Fraude Reputacional</p>
-            <p class="max-w-3xl mx-auto text-gray-600 mt-4">
+            <p class="max-w-3xl mx-auto text-gray-600 mt-4 text-justify">
                 Esta es una aplicación interactiva que detalla el plan de respuesta de MITRECONECT para abordar las denuncias de fraude,
                 reestructurar la gobernanza y restaurar la confianza de los empleados e inversores a través de acciones decisivas.
             </p>
         </header>
 
         <main>
-            <!-- SECCIÓN 1: ACCIÓN INMEDIATA -->
             <section class="mb-16">
                 <h2 class="text-3xl font-bold text-center mb-8">🚨 1. PUNTO DE CONTROL INMEDIATO (Respuesta 1.a)</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
-                    Ante la crisis, se requiere una acción inmediata para detener el daño financiero y moral. Estas dos acciones
-                    prioritarias se ejecutan simultáneamente para estabilizar la situación y comenzar la investigación.
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 text-justify">
+                    Ante la crisis, se requiere una acción inmediata y objetiva para detener el daño financiero y moral.
+                    Estas dos acciones prioritarias se ejecutan simultáneamente para estabilizar la situación, cumplir la responsabilidad fiduciaria
+                    y comenzar la investigación de manera imparcial.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Tarjeta de Acción 1 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
                         <div class="text-6xl mb-4">💵</div>
-                        <h3 class="text-2xl font-bold text-[#00429D] mb-3">PAGO INMEDIATO Y CONGELACIÓN DE BONOS</h3>
-                        <p class="text-gray-700 mb-4">Utilizar la solvencia real para liquidar *inmediatamente* los sueldos atrasados. Suspender cualquier bono o incentivo variable de la Alta Dirección.</p>
+                        <h3 class="text-2xl font-bold text-[#00429D] mb-3">PAGO PRIORITARIO Y CONGELACIÓN DE BONOS</h3>
+                        <p class="text-gray-700 mb-4 text-justify">
+                            Se ejecuta la liquidación prioritaria de pasivos laborales pendientes, utilizando las reservas de solvencia.
+                            Concurrente a ello, se ordena la suspensión total y temporal de cualquier esquema de bono o incentivo variable
+                            para la Alta Dirección.
+                        </p>
                         <div class="bg-gray-50 p-4 rounded-md border-l-4 border-gray-300">
-                            <h4 class="font-semibold text-gray-800">Justificación (Deber Fiduciario)</h4>
-                            <p class="text-sm text-gray-600">Demuestra compromiso con el empleado y detiene el posible desvío de recursos mientras se investiga.</p>
+                            <h4 class="font-semibold text-gray-800">Objetivo y Justificación</h4>
+                            <p class="text-sm text-gray-600 text-justify">Demuestra un compromiso inquebrantable con la plantilla (Deber Fiduciario) y mitiga el riesgo de un mayor sangrado de capital durante la fase de investigación.</p>
                         </div>
                     </div>
-                    <!-- Tarjeta de Acción 2 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105">
                         <div class="text-6xl mb-4">🔍</div>
-                        <h3 class="text-2xl font-bold text-[#00429D] mb-3">AUDITORÍA FORENSE EXPRESS</h3>
-                        <p class="text-gray-700 mb-4">Contratación urgente de un auditor externo enfocado en las cuentas por pagar, nóminas y gastos operativos para identificar el desvío.</p>
+                        <h3 class="text-2xl font-bold text-[#00429D] mb-3">AUDITORÍA FORENSE INDEPENDIENTE</h3>
+                        <p class="text-gray-700 mb-4 text-justify">
+                            Contratar una firma externa con mandato específico para auditar las cuentas por pagar, nóminas, gastos de representación
+                            y cualquier Sociedad de Propósito Especial (SPV) o subsidiaria operativa relacionada con la cadena de suministro.
+                        </p>
                         <div class="bg-gray-50 p-4 rounded-md border-l-4 border-gray-300">
-                            <h4 class="font-semibold text-gray-800">Justificación (Objetividad)</h4>
-                            <p class="text-sm text-gray-600">Asegura la objetividad y rapidez en el diagnóstico del problema real, aislando a los responsables.</p>
+                            <h4 class="font-semibold text-gray-800">Objetivo y Justificación</h4>
+                            <p class="text-sm text-gray-600 text-justify">Asegura la objetividad total del diagnóstico, aísla al Consejo de posibles conflictos de interés y garantiza la rapidez en la identificación de los responsables de las conductas antijurídicas.</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Visualización Clave 1.a -->
-                <div class="mt-12 bg-white p-6 rounded-lg shadow-lg">
+                <div class="mt-12 pt-4 bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold text-center mb-4">Visualización Clave: Focos de Auditoría (Datos Hipotéticos)</h3>
                     <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
                         El gráfico de dona ilustra las áreas de mayor riesgo donde se centrará la auditoría forense.
@@ -147,91 +145,98 @@
                 </div>
             </section>
             
-            <!-- SECCIÓN 2: HOJA DE RUTA DE LA REFORMA -->
             <section class="mb-16">
-                <h2 class="text-3xl font-bold text-center mb-12 mt-16">🛣️ 2. PLAN DE REVISIÓN Y REFORMA ESTRUCTURAL (Respuesta 1.b)</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
-                    Una vez controlada la crisis inmediata, se implementa una hoja de ruta para reestructurar el Gobierno Corporativo
-                    y asegurar que los principios éticos se integren en la toma de decisiones.
+                <h2 class="text-3xl font-bold text-center mb-12 mt-16">🛣️ 2. PLAN DE REVISIÓN Y REFORMA ESTRUCTURAL (Mediano a Largo Plazo)</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 text-justify">
+                    El plan de reforma se extiende a un año para garantizar que los cambios estructurales se implementen (180 días) y que la nueva cultura de cumplimiento se consolide y mida (365 días).
                 </p>
                 <div class="relative max-w-4xl mx-auto">
                     <div class="timeline-line hidden md:block"></div>
                     
-                    <!-- Fase I -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="text-sm font-semibold text-[#00429D] bg-[#A9D0DE] px-3 py-1 rounded-full">Corto Plazo (0-30 Días)</span>
-                            <h3 class="text-xl font-bold my-2">Fase I: Transparencia y Ética</h3>
-                            <p class="text-gray-700">Comunicación formal del propietario protegiendo a los **denunciantes** y confirmando la solvencia de la empresa para tranquilizar a los empleados.</p>
+                            <h3 class="text-xl font-bold my-2">Fase I: Gestión de Stakeholders (Transparencia)</h3>
+                            <p class="text-gray-700 text-justify">Comunicación formal y pública del propietario, dirigida a empleados e inversores, garantizando la protección total a los <b>denunciantes</b> y ratificando la solvencia financiera de la compañía.</p>
                         </div>
                     </div>
-                    <!-- Fase II -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="text-sm font-semibold text-[#00429D] bg-[#A9D0DE] px-3 py-1 rounded-full">Mediano Plazo (30-180 Días)</span>
-                            <h3 class="text-xl font-bold my-2">Fase II: Independencia y Equidad</h3>
-                            <p class="text-gray-700">Reestructurar el **Consejo de Administración** para que la mayoría de sus miembros sean **Consejeros Independientes** y no tengan conflictos de interés.</p>
+                            <h3 class="text-xl font-bold my-2">Fase II: Principio de Independencia</h3>
+                            <p class="text-gray-700 text-justify"><b>Reestructurar el Consejo de Administración</b> para superar el umbral de independencia. Esta medida asegura una mayoría de <b>Consejeros Independientes</b> que supervisarán la gestión de forma objetiva y desinteresada.</p>
                         </div>
                     </div>
-                    <!-- Fase III -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="text-sm font-semibold text-[#00429D] bg-[#A9D0DE] px-3 py-1 rounded-full">Mediano Plazo (30-180 Días)</span>
                             <h3 class="text-xl font-bold my-2">Fase III: Control y Responsabilidad</h3>
-                            <p class="text-gray-700">Implementar un **Comité de Ética y Auditoría** compuesto *exclusivamente* por los nuevos Consejeros Independientes, dándoles autoridad total de supervisión.</p>
+                            <p class="text-gray-700 text-justify"><b>Fortalecer la función del Comité de Auditoría</b>, reservando su integración exclusivamente para consejeros independientes con autoridad delegada para realizar investigaciones sin el consentimiento previo de la Alta Dirección.</p>
                         </div>
                     </div>
+                    
+                    <!-- Cerramos la estructura flotante después de la Fase III -->
+                    <div style="clear: both;"></div> 
 
                 </div>
+                
+                <!-- Fase IV como bloque independiente centrado, sin flotar -->
+                <div class="max-w-2xl mx-auto mt-8 mb-12">
+                    <div class="bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#4771B2]">
+                        <span class="text-sm font-semibold text-[#00429D] bg-[#A9D0DE] px-3 py-1 rounded-full block text-center max-w-xs mx-auto mb-3">Largo Plazo (180-365 Días)</span>
+                        <h3 class="text-xl font-bold my-2 text-center">Fase IV: Consolidación y Sostenibilidad</h3>
+                        <p class="text-gray-700 text-justify"><b>Medición de la Efectividad del GC</b> y Auditoría de Cultura Ética. Se realizan encuestas periódicas (clima laboral, percepción de cumplimiento) y se presenta el primer informe anual del Comité de Auditoría a los <b>stakeholders</b> para demostrar resultados concretos.</p>
+                    </div>
+                </div>
+                <!-- Fin de Fase IV -->
 
-                <!-- Visualización Clave 1.b -->
-                <div class="mt-12 bg-white p-6 rounded-lg shadow-lg">
+                <!-- BLOQUE MOVIDO Y SEPARADO -->
+                <div class="mt-20 pt-8 bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold text-center mb-4">Visualización Clave: Reforma del Consejo (Antes vs. Después)</h3>
-                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
-                        Este gráfico de barras compara la composición del Consejo de Administración antes y después de la reforma.
-                        El cambio clave es la drástica reducción de consejeros ejecutivos y relacionados, en favor de una mayoría
-                        independiente, lo cual es fundamental para un buen Gobierno Corporativo.
+                    <p class="text-center text-gray-600 max-w-4xl mx-auto mb-6 text-justify">
+                        Este gráfico de barras compara la composición del Consejo de Administración antes y después de la reforma. 
+                        El cambio clave es la drástica reducción de consejeros ejecutivos y relacionados, en favor de una mayoría 
+                        independiente, lo cual es fundamental para un buen Gobierno Corporativo. Al finalizar el plan de 365 días, 
+                        la composición final del Consejo garantizará el principio de Independencia, fortaleciendo la supervisión y 
+                        minimizando los conflictos de interés.
                     </p>
                     <div class="chart-container">
                         <canvas id="boardChart"></canvas>
                     </div>
                 </div>
+                <!-- FIN DEL BLOQUE MOVIDO Y SEPARADO -->
             </section>
 
-            <!-- SECCIÓN 3: VIGILANCIA PERMANENTE -->
             <section class="mb-16">
                 <h2 class="text-3xl font-bold text-center mb-12 mt-16">🛰️ 3. MECANISMO DE VIGILANCIA PERMANENTE (Respuesta 1.c)</h2>
-                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10">
-                    Para prevenir futuras crisis, se establece un sistema de "Doble Vigilancia" que combina el control humano (social)
-                    con el control tecnológico (digital), creando una defensa robusta contra el fraude.
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-10 text-justify">
+                    Para garantizar la sostenibilidad de la ética, se implementa un mecanismo dual o de <b>Doble Vigilancia</b> que cruza la supervisión humana (social)
+                    con la validación tecnológica (digital), específico para la operación logística de MITRECONECT.
                 </p>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Tarjeta Vigilancia 1 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <div class="text-6xl mb-4">📣</div>
                         <h3 class="text-2xl font-bold text-[#00429D] mb-3">CONTROL SOCIAL (Whistleblowing)</h3>
-                        <p class="text-gray-700">Implementación de una **Línea Ética Externa Anónima**, gestionada por un tercero independiente, para que cualquier empleado pueda reportar anomalías sin miedo a represalias.</p>
+                        <p class="text-gray-700 text-justify">Establecer un canal de denuncia <b>anónimo y confidencial</b>, administrado por un tercero externo ajeno a MITRECONECT. Este mecanismo fomenta la cultura de la denuncia y protege al empleado (Principio de Equidad).</p>
                     </div>
-                    <!-- Tarjeta Vigilancia 2 -->
                     <div class="bg-white p-6 rounded-lg shadow-lg">
                         <div class="text-6xl mb-4">🚚</div>
                         <h3 class="text-2xl font-bold text-[#00429D] mb-3">CONTROL DIGITAL (Logística)</h3>
-                        <p class="text-gray-700">**Auditoría Cruzada de Datos:** Vincular el sistema de flotas (TMS) con el contable para **contrastar automáticamente** gastos (ej. combustible, kilometraje) contra la actividad real de las unidades.</p>
+                        <p class="text-gray-700 text-justify"><b>Auditoría Cruzada de Datos (TMS-Contabilidad)</b>: Implementar un sistema de <b>validación cruzada automatizada</b> entre el Sistema de Gestión de Flotas (TMS/ERP) y el sistema contable para verificar la coherencia de los indicadores operativos con los gastos financieros reportados (combustible, mantenimiento).</p>
                     </div>
                 </div>
 
                 <div class="mt-8 bg-white p-6 rounded-lg shadow-lg border-t-4 border-[#F97316]">
                     <h3 class="text-2xl font-bold text-[#00429D] mb-3 text-center">Justificación de la Doble Vigilancia</h3>
-                    <p class="text-gray-700 text-center text-lg max-w-3xl mx-auto">
-                        La combinación de ambos es la mejor defensa: la **vigilancia social** detecta la falta de ética,
-                        mientras que el **control digital** previene la manipulación de datos financieros basados en operaciones logísticas falsas.
+                    <p class="text-gray-700 text-center text-lg max-w-3xl mx-auto text-justify">
+                        La combinación de ambos es la mejor defensa: la vigilancia social detecta la falta de ética,
+                        mientras que el control digital previene la manipulación de datos financieros basados en operaciones logísticas falsas, sellando las vías de fraude que un sistema contable tradicional no detectaría.
                     </p>
                 </div>
 
-                <!-- Visualización Clave 1.c -->
-                <div class="mt-12 bg-white p-6 rounded-lg shadow-lg">
+                <div class="mt-12 pt-8 bg-white p-6 rounded-lg shadow-lg">
                     <h3 class="text-2xl font-bold text-center mb-4">Visualización Clave: Impacto Proyectado de la Vigilancia</h3>
-                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6">
+                    <p class="text-center text-gray-600 max-w-3xl mx-auto mb-6 text-justify">
                         Este gráfico de líneas proyecta cómo la implementación de la línea ética (aumentando los reportes procesados)
                         impactará directamente en la reducción de las pérdidas financieras por fraude, demostrando el retorno de la inversión (ROI) de la transparencia.
                     </p>
@@ -240,7 +245,6 @@
                     </div>
                 </div>
             </section>
-
         </main>
 
         <footer class="mt-16 text-center text-gray-500 text-sm">
@@ -249,7 +253,6 @@
     </div>
 
     <script>
-        // Función de utilidad para manejar etiquetas de múltiples líneas en Tooltips de Chart.js
         function getTooltipTitle(tooltipItems) {
             const item = tooltipItems[0];
             let label = item.chart.data.labels[item.dataIndex];
@@ -260,7 +263,6 @@
             }
         }
 
-        // Configuración común de Tooltip requerida
         const commonTooltipOptions = {
             plugins: {
                 tooltip: {
@@ -271,12 +273,10 @@
             }
         };
         
-        // --- Gráfico 1: Focos de Auditoría (Dona) ---
         const auditCtx = document.getElementById('auditChart').getContext('2d');
         new Chart(auditCtx, {
             type: 'doughnut',
             data: {
-                // Aplicando lógica de envoltura de 16 caracteres
                 labels: [['Gastos Operativos', 'Inflados'], ['Bonos No', 'Autorizados'], ['Nómina Fantasma'], ['Otros Desvíos']],
                 datasets: [{
                     label: 'Focos de Auditoría',
@@ -291,6 +291,9 @@
                 plugins: {
                     legend: {
                         position: 'top',
+                        labels: {
+                            padding: 20
+                        }
                     },
                     title: {
                         display: false,
@@ -301,12 +304,10 @@
             }
         });
 
-        // --- Gráfico 2: Reforma del Consejo (Barras Agrupadas) ---
         const boardCtx = document.getElementById('boardChart').getContext('2d');
         new Chart(boardCtx, {
             type: 'bar',
             data: {
-                // Aplicando lógica de envoltura de 16 caracteres
                 labels: [
                     ['Consejeros', 'Ejecutivos'], 
                     ['Consejeros', 'Independientes'], 
@@ -351,7 +352,6 @@
             }
         });
 
-        // --- Gráfico 3: Impacto de la Vigilancia (Líneas Combinadas) ---
         const vigilanceCtx = document.getElementById('vigilanceChart').getContext('2d');
         new Chart(vigilanceCtx, {
             type: 'line',
@@ -402,7 +402,8 @@
                         title: {
                             display: true,
                             text: 'Pérdidas (Miles USD)'
-                        },
+                        }
+                        ,
                         grid: {
                             drawOnChartArea: false,
                         },
